@@ -1,0 +1,9 @@
+# build binaries
+[b|B]in/
+[o|O]bj/
+
+# docker files
+[d|D]ockerfile*
+docker-compose.yaml
+.dockerignore
+

@@ -1,2 +1,2 @@
 # playwright-pom-net
-Template repository using PlayWright with .NET bindings and PoM pattern.
+Template repository using PlayWright with .NET bindings. Tests against [Cypress RealWold App](https://github.com/cypress-io/cypress-realworld-app) in order to showcase the capabilities of this implementation.

@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 
-namespace testFramework.support;
+namespace TestFramework.Support;
 
 public static class Env {
     private static IConfigurationRoot? env {get; set;}

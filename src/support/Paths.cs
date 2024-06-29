@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using static NUnit.Framework.TestContext;
 
-namespace testFramework.support;
+namespace TestFramework.Support;
 
 public static class Paths {
   public static string Pwd { get; } = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)!;

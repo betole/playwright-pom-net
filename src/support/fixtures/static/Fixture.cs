@@ -3,16 +3,16 @@ using System.IO;
 using System.Text.Json.Nodes;
 using System.Collections.Generic;
 
-using testFramework.support.enums;
+using TestFramework.Support.Enums;
 
-namespace testFramework.support;
+namespace TestFramework.Support.Fixtures.Static;
 
-public class Fixture {
+public class FixtureLoader {
     private readonly string pwd = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)!;
 
-    private Dictionary<Fixtures, JsonNode> fixtures = [];
+    private Dictionary<FixturePaths, JsonNode> fixtures = [];
 
-    private JsonNode ReadJsonNode(Fixtures fixture, string env) {
+    private JsonNode ReadJsonNode(FixturePaths fixture, string env) {
       string jsonString = File.ReadAllText(
         Path.Combine(
           this.pwd, 
@@ -25,21 +25,21 @@ public class Fixture {
       return node;
     }
 
-    private void Load(Fixtures[] fixtures) {
+    private void Load(FixturePaths[] fixtures) {
         string? env = Env.Get("ENVIRONMENT");
         if (env is null) {
           throw new KeyNotFoundException("Can't load fixtures: 'ENVIRONMENT' not found.");
         }
-        foreach (Fixtures fixture in fixtures) {
+        foreach (FixturePaths fixture in fixtures) {
             this.fixtures!.Add(fixture, this.ReadJsonNode(fixture, env));
         }
     }
 
-    public Fixture(Fixtures[] fixtures) {
+    public FixtureLoader(FixturePaths[] fixtures) {
         this.Load(fixtures);
     }
 
-    public JsonNode Get(Fixtures fixture) {
+    public JsonNode Get(FixturePaths fixture) {
         return this.fixtures![fixture];
     }
 }

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
-using testFramework.support.abstracts;
+using TestFramework.Support.abstracts;
 
-namespace testFramework.support.pages;
+namespace TestFramework.Support.pages;
 
 public sealed class LoginPage {
   private readonly IPage _page;

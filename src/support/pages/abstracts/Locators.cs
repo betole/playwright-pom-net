@@ -1,6 +1,6 @@
 using Microsoft.Playwright;
 
-namespace testFramework.support.abstracts;
+namespace TestFramework.Support.abstracts;
 
 public abstract class Locators(IPage page) {
     protected IPage _page = page;

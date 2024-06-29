@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
-namespace testFramework.support.pages.interfaces;
+namespace TestFramework.Support.pages.interfaces;
 
 public interface IScreenshotablePage {
   IPage Page {get; set;}

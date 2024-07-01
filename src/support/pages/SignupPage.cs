@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 
 using TestFramework.Support.abstracts;
+using TestFramework.Support.Fixtures.Dynamic.Models;
 
 namespace TestFramework.Support.pages;
 
@@ -83,6 +84,15 @@ public sealed class SignupPage
     if (userName != null) await _fillField(Fields.Username, userName);
     if (password != null) await _fillField(Fields.Password, password);
     if (confirmPassword != null) await _fillField(Fields.ConfirmPassword, confirmPassword);
+  }
+
+  public async Task FillForm(UserModel user, bool? confirmPassword)
+  {
+    if (user.FirstName != null) await _fillField(Fields.FirstName, user.FirstName);
+    if (user.LastName != null) await _fillField(Fields.LastName, user.LastName);
+    if (user.UserName != null) await _fillField(Fields.Username, user.UserName);
+    if (user.Password != null) await _fillField(Fields.Password, user.Password);
+    if (user.Password != null && confirmPassword != null) await _fillField(Fields.ConfirmPassword, user.Password);
   }
 
   public async Task GoToSignIn() => await Links.GoToSignIn.ClickAsync();

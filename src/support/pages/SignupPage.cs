@@ -5,16 +5,18 @@ using TestFramework.Support.abstracts;
 
 namespace TestFramework.Support.pages;
 
-public sealed class SignupPage {
+public sealed class SignupPage
+{
   private readonly IPage _page;
-  public FieldLocators Fields {get; private set;}
-  public ButtonLocators Buttons {get; private set;}
-  public LinkLocators Links {get; private set;}
-  public LabelLocators Labels {get; private set;}
-  public ContainerLocators Containers {get; private set;}
-  
-  public SignupPage(IPage page) {
-    _page = page; 
+  public FieldLocators Fields { get; private set; }
+  public ButtonLocators Buttons { get; private set; }
+  public LinkLocators Links { get; private set; }
+  public LabelLocators Labels { get; private set; }
+  public ContainerLocators Containers { get; private set; }
+
+  public SignupPage(IPage page)
+  {
+    _page = page;
     Fields = new FieldLocators(_page);
     Buttons = new ButtonLocators(_page);
     Links = new LinkLocators(_page);
@@ -23,7 +25,8 @@ public sealed class SignupPage {
   }
 
   #region locators
-  public sealed class FieldLocators(IPage page) : Locators(page) {
+  public sealed class FieldLocators(IPage page) : Locators(page)
+  {
     public ILocator FirstName => _page.Locator("#firstName");
     public ILocator LastName => _page.Locator("#lastName");
     public ILocator Username => _page.Locator("#username");
@@ -31,7 +34,8 @@ public sealed class SignupPage {
     public ILocator ConfirmPassword => _page.Locator("#confirmPassword");
   }
 
-  public sealed class LabelLocators(IPage page) : Locators(page) {
+  public sealed class LabelLocators(IPage page) : Locators(page)
+  {
     public ILocator HeaderTitle => _page.Locator("[data-test='signup-title']");
     public ILocator FirstNameRequired => _page.Locator("#firstName-helper-text");
     public ILocator LastNameRequired => _page.Locator("#lastName-helper-text");
@@ -40,22 +44,26 @@ public sealed class SignupPage {
     public ILocator ConfirmPasswordRequired => _page.Locator("#confirmPassword-helper-text");
   }
 
-  public sealed class ButtonLocators(IPage page) : Locators(page) {
+  public sealed class ButtonLocators(IPage page) : Locators(page)
+  {
     public ILocator Signup => _page.Locator("[data-test='signup-submit']");
   }
 
-  public sealed class ContainerLocators(IPage page) : Locators(page) {
+  public sealed class ContainerLocators(IPage page) : Locators(page)
+  {
     public ILocator Root => _page.Locator("#root");
   }
-  
-  public sealed class LinkLocators(IPage page) : Locators(page) {
+
+  public sealed class LinkLocators(IPage page) : Locators(page)
+  {
     public ILocator GoToSignIn => _page.Locator("a[href='/signin']");
     public ILocator GoToCypressDotIo => _page.Locator("a[href='https://cypress.io']");
   }
   #endregion
 
   #region actions
-  private async Task _fillField(ILocator field, string value, bool clickFirst = true) {
+  private async Task _fillField(ILocator field, string value, bool clickFirst = true)
+  {
     if (clickFirst) await field.ClickAsync();
     await field.FillAsync(value);
   }
@@ -68,7 +76,8 @@ public sealed class SignupPage {
     string? userName,
     string? password,
     string? confirmPassword
-  ) {
+  )
+  {
     if (firstName != null) await _fillField(Fields.FirstName, firstName);
     if (lastName != null) await _fillField(Fields.LastName, lastName);
     if (userName != null) await _fillField(Fields.Username, userName);

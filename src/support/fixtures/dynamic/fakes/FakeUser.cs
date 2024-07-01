@@ -5,11 +5,14 @@ using TestFramework.Support.Fixtures.Dynamic.Models;
 
 namespace TestFramework.Support.Fixtures.Dynamic.Fakes;
 
-public class FakeUser: Faker<UserModel> {
+public class FakeUser : Faker<UserModel>
+{
   public int Seed { get; private set; }
 
-  private void ValidInputRuleSet() {
-    RuleSet("validInput", set => {
+  private void ValidInputRuleSet()
+  {
+    RuleSet("validInput", set =>
+    {
       set
       .RuleFor(user => user.FirstName, bogus => bogus.Name.FirstName())
       .RuleFor(user => user.LastName, bogus => bogus.Name.LastName())
@@ -19,8 +22,10 @@ public class FakeUser: Faker<UserModel> {
     });
   }
 
-  private void ApiMockRuleSet(PrivacyLevels? privacyLevel) {
-    RuleSet("apiMock", set => {
+  private void ApiMockRuleSet(PrivacyLevels? privacyLevel)
+  {
+    RuleSet("apiMock", set =>
+    {
       set
         .RuleFor(user => user.FirstName, bogus => bogus.Name.FirstName())
         .RuleFor(user => user.LastName, bogus => bogus.Name.LastName())
@@ -30,12 +35,13 @@ public class FakeUser: Faker<UserModel> {
         .RuleFor(user => user.PhoneNumber, bogus => bogus.Phone.PhoneNumberFormat())
         .RuleFor(user => user.Avatar, bogus => bogus.Internet.Avatar().OrNull(bogus))
         .RuleFor(user => user.Balance, bogus => (float)bogus.Finance.Amount(-500, 10000))
-        .RuleFor(user => user.PrivacyLevel, bogus => privacyLevel != null? privacyLevel.Level : bogus.PickRandom<PrivacyLevels>(PrivacyLevels.All).Level);
+        .RuleFor(user => user.PrivacyLevel, bogus => privacyLevel != null ? privacyLevel.Level : bogus.PickRandom<PrivacyLevels>(PrivacyLevels.All).Level);
     });
   }
 
-  public FakeUser(int? seed = null, PrivacyLevels? privacyLevel = null) {
-    Seed = seed?? new Random().Next(0, 10000);
+  public FakeUser(int? seed = null, PrivacyLevels? privacyLevel = null)
+  {
+    Seed = seed ?? new Random().Next(0, 10000);
     UseSeed(Seed);
     ValidInputRuleSet();
     ApiMockRuleSet(privacyLevel);

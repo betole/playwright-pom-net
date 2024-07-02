@@ -6,14 +6,11 @@ using TestFramework.Support.Fixtures.Dynamic.Models;
 
 namespace TestFramework.Support.Fixtures.Dynamic.Fakes;
 
-public class FakeBankAccount : Faker<BankAccountModel>
-{
+public class FakeBankAccount : Faker<BankAccountModel> {
   public int Seed { get; private set; }
 
-  private void ValidInputRuleSet()
-  {
-    RuleSet("validInput", set =>
-    {
+  private void ValidInputRuleSet() {
+    RuleSet("validInput", set => {
       set
         .RuleFor(acc => acc.AccountNumber, bogus => bogus.Finance.Account())
         .RuleFor(acc => acc.RoutingNumber, bogus => bogus.Finance.RoutingNumber())
@@ -21,10 +18,8 @@ public class FakeBankAccount : Faker<BankAccountModel>
     });
   }
 
-  private void ApiMockRuleSet(bool? isDeleted)
-  {
-    RuleSet("apiMock", set =>
-    {
+  private void ApiMockRuleSet(bool? isDeleted) {
+    RuleSet("apiMock", set => {
       set
         .RuleFor(acc => acc.AccountNumber, bogus => bogus.Finance.Account())
         .RuleFor(acc => acc.RoutingNumber, bogus => bogus.Finance.RoutingNumber())
@@ -39,8 +34,7 @@ public class FakeBankAccount : Faker<BankAccountModel>
   }
 
 
-  public FakeBankAccount(int? seed = null, bool? isDeleted = null)
-  {
+  public FakeBankAccount(int? seed = null, bool? isDeleted = null) {
     Seed = seed ?? new Random().Next(0, 10000);
     Random rng = new Random(Seed);
     UseSeed(Seed);

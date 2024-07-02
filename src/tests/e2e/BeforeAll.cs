@@ -3,17 +3,14 @@ using TestFramework.Support;
 namespace TestFramework.Tests.E2e;
 
 [SetUpFixture]
-public class BeforeAll
-{
+public class BeforeAll {
   [OneTimeSetUp]
-  public void RunBeforeAnyTests()
-  {
+  public void RunBeforeAnyTests() {
     Env.Load();
   }
 
   [OneTimeTearDown]
-  public void RunAfterAnyTests()
-  {
+  public void RunAfterAnyTests() {
     // ...
   }
 }

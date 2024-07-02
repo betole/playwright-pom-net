@@ -5,14 +5,11 @@ using TestFramework.Support.Fixtures.Dynamic.Models;
 
 namespace TestFramework.Support.Fixtures.Dynamic.Fakes;
 
-public class FakeUser : Faker<UserModel>
-{
+public class FakeUser : Faker<UserModel> {
   public int Seed { get; private set; }
 
-  private void ValidInputRuleSet()
-  {
-    RuleSet("validInput", set =>
-    {
+  private void ValidInputRuleSet() {
+    RuleSet("validInput", set => {
       set
       .RuleFor(user => user.FirstName, bogus => bogus.Name.FirstName())
       .RuleFor(user => user.LastName, bogus => bogus.Name.LastName())
@@ -22,10 +19,8 @@ public class FakeUser : Faker<UserModel>
     });
   }
 
-  private void ApiMockRuleSet(PrivacyLevels? privacyLevel)
-  {
-    RuleSet("apiMock", set =>
-    {
+  private void ApiMockRuleSet(PrivacyLevels? privacyLevel) {
+    RuleSet("apiMock", set => {
       set
         .RuleFor(user => user.FirstName, bogus => bogus.Name.FirstName())
         .RuleFor(user => user.LastName, bogus => bogus.Name.LastName())
@@ -39,8 +34,7 @@ public class FakeUser : Faker<UserModel>
     });
   }
 
-  public FakeUser(int? seed = null, PrivacyLevels? privacyLevel = null)
-  {
+  public FakeUser(int? seed = null, PrivacyLevels? privacyLevel = null) {
     Seed = seed ?? new Random().Next(0, 10000);
     UseSeed(Seed);
     ValidInputRuleSet();

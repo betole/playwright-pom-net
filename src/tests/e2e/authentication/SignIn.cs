@@ -12,28 +12,24 @@ namespace TestFramework.Tests.E2e.Authentication;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class ExampleTest : BasePage
-{
+public class ExampleTest : BasePage {
   public FixtureLoader? fix;
   private LoginPage _lp;
   private FakeBankAccount fakeBankAcc = new FakeBankAccount();
 
   [OneTimeSetUp]
-  public void OneTimeSetup()
-  {
+  public void OneTimeSetup() {
     fix = new FixtureLoader([Users]);
     BankAccountModel bankAcc = fakeBankAcc.Generate();
   }
 
   [SetUp]
-  public void Setup()
-  {
+  public void Setup() {
     _lp = new LoginPage(Page);
   }
 
   [Test, Description("TC0001: Create a new ")]
-  public async Task HasTitle()
-  {
+  public async Task HasTitle() {
 
     Step("Go to Playwright page");
     await _lp.Open("/signin");
@@ -47,8 +43,7 @@ public class ExampleTest : BasePage
   }
 
   [Test]
-  public async Task GetStartedLink()
-  {
+  public async Task GetStartedLink() {
     await Page.GotoAsync("https://playwright.dev");
 
     // Click the get started link.

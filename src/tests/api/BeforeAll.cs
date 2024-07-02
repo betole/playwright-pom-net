@@ -3,17 +3,14 @@ using System;
 namespace TestFramework.Tests.Api;
 
 [SetUpFixture]
-public class BeforeAll
-{
+public class BeforeAll {
   [OneTimeSetUp]
-  public void RunBeforeAnyTests()
-  {
+  public void RunBeforeAnyTests() {
     // ...
   }
 
   [OneTimeTearDown]
-  public void RunAfterAnyTests()
-  {
+  public void RunAfterAnyTests() {
     // ...
   }
 }

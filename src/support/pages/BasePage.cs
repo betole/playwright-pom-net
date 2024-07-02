@@ -13,15 +13,12 @@ using static TestFramework.Support.Paths;
 
 namespace TestFramework.Support.pages;
 
-public class BasePage : PageTest, IScreenshotablePage
-{
+public class BasePage : PageTest, IScreenshotablePage {
   public new IPage Page { get; set; }
   private string? StepDescription;
   public delegate void StepDelegate();
-  public void Step(string description)
-  {
-    if (this.StepDescription != null)
-    {
+  public void Step(string description) {
+    if (this.StepDescription != null) {
       this.StepDescription += " \u2713";
       Console.WriteLine(this.StepDescription);
       this.StepDescription = description;
@@ -29,16 +26,13 @@ public class BasePage : PageTest, IScreenshotablePage
   }
 
   [SetUp]
-  public async Task InitPage()
-  {
+  public async Task InitPage() {
     this.Page = await base.Context.NewPageAsync().ConfigureAwait(continueOnCapturedContext: false);
   }
 
   [TearDown]
-  public async Task TearDownSaveScreenshot()
-  {
-    if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
-    {
+  public async Task TearDownSaveScreenshot() {
+    if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure) {
       await ((IScreenshotablePage)this).SaveScreenshot(ScreenshotFile(TestContext.CurrentContext.Test));
     }
   }

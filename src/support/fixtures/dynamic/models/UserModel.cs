@@ -1,7 +1,6 @@
 namespace TestFramework.Support.Fixtures.Dynamic.Models;
 
-public record UserModel
-{
+public record UserModel {
   public required string FirstName { get; set; }
   public required string LastName { get; set; }
   public required string UserName { get; set; }

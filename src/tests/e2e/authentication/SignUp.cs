@@ -8,21 +8,18 @@ namespace TestFramework.Tests.E2e.Authentication;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class SignUp : BasePage
-{
+public class SignUp : BasePage {
   private SignupPage SUP;
   private UserModel NewUser;
 
   [SetUp]
-  public void Setup()
-  {
+  public void Setup() {
     SUP = new SignupPage(Page);
     NewUser = new FakeUser().Generate("validInput");
   }
 
   [Test, Description("TC0001: Create a new user via Sign Up Page")]
-  public async Task SignUpNewUserTest()
-  {
+  public async Task SignUpNewUserTest() {
 
     Step("Go to SignUp page -> Validate URL, title and element state");
     await SUP.Open("/signup");

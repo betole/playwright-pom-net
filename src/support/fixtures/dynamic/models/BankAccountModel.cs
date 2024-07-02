@@ -2,8 +2,7 @@ using System.Runtime.CompilerServices;
 
 namespace TestFramework.Support.Fixtures.Dynamic.Models;
 
-public record BankAccountModel
-{
+public record BankAccountModel {
   public required string BankName { get; set; }
   public required string AccountNumber { get; set; }
   public required string RoutingNumber { get; set; }

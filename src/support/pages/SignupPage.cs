@@ -69,7 +69,7 @@ public sealed class SignupPage
     await field.FillAsync(value);
   }
 
-  public async Task Open(string page) => await _page.GotoAsync(page);
+  public async Task Open(string page) => await _page.GotoAsync(Env.Get("baseUrl") + page);
 
   public async Task FillForm(
     string? firstName,
@@ -86,13 +86,13 @@ public sealed class SignupPage
     if (confirmPassword != null) await _fillField(Fields.ConfirmPassword, confirmPassword);
   }
 
-  public async Task FillForm(UserModel user, bool? confirmPassword)
+  public async Task FillForm(UserModel user, bool confirmPassword = true)
   {
     if (user.FirstName != null) await _fillField(Fields.FirstName, user.FirstName);
     if (user.LastName != null) await _fillField(Fields.LastName, user.LastName);
     if (user.UserName != null) await _fillField(Fields.Username, user.UserName);
     if (user.Password != null) await _fillField(Fields.Password, user.Password);
-    if (user.Password != null && confirmPassword != null) await _fillField(Fields.ConfirmPassword, user.Password);
+    if (user.Password != null && confirmPassword) await _fillField(Fields.ConfirmPassword, user.Password);
   }
 
   public async Task GoToSignIn() => await Links.GoToSignIn.ClickAsync();

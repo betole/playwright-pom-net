@@ -79,7 +79,7 @@ public sealed class LoginPage
     await field.FillAsync(value);
   }
 
-  public async Task Open(string page) => await _page.GotoAsync(page);
+  public async Task Open(string page) => await _page.GotoAsync(Env.Get("baseUrl") + page);
 
   public async Task FillForm(
     string? userName,

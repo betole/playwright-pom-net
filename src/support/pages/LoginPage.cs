@@ -1,22 +1,22 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
-using testFramework.support.abstracts;
+using TestFramework.Support.abstracts;
 
-namespace testFramework.support.pages;
+namespace TestFramework.Support.pages;
 
 public sealed class LoginPage {
   private readonly IPage _page;
-  public FieldLocators Fields {get; private set;}
-  public ButtonLocators Buttons {get; private set;}
-  public LinkLocators Links {get; private set;}
-  public LabelLocators Labels {get; private set;}
-  public ContainerLocators Containers {get; private set;}
-  public CheckboxLocators Checkboxes {get; private set;}
-  public AlertLocators Alerts {get; private set;}
-  
+  public FieldLocators Fields { get; private set; }
+  public ButtonLocators Buttons { get; private set; }
+  public LinkLocators Links { get; private set; }
+  public LabelLocators Labels { get; private set; }
+  public ContainerLocators Containers { get; private set; }
+  public CheckboxLocators Checkboxes { get; private set; }
+  public AlertLocators Alerts { get; private set; }
+
   public LoginPage(IPage page) {
-    _page = page; 
+    _page = page;
     Fields = new FieldLocators(_page);
     Buttons = new ButtonLocators(_page);
     Links = new LinkLocators(_page);
@@ -48,7 +48,7 @@ public sealed class LoginPage {
   public sealed class ContainerLocators(IPage page) : Locators(page) {
     public ILocator Root => _page.Locator("#root");
   }
-  
+
   public sealed class LinkLocators(IPage page) : Locators(page) {
     public ILocator GoToSignUp => _page.Locator("a[href='/signup']");
     public ILocator GoToCypressDotIo => _page.Locator("a[href='https://cypress.io']");
@@ -69,7 +69,7 @@ public sealed class LoginPage {
     await field.FillAsync(value);
   }
 
-  public async Task Open(string page) => await _page.GotoAsync(page);
+  public async Task Open(string page) => await _page.GotoAsync(Env.Get("baseUrl") + page);
 
   public async Task FillForm(
     string? userName,

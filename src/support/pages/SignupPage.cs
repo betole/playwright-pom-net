@@ -1,20 +1,21 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
-using testFramework.support.abstracts;
+using TestFramework.Support.abstracts;
+using TestFramework.Support.Fixtures.Dynamic.Models;
 
-namespace testFramework.support.pages;
+namespace TestFramework.Support.pages;
 
 public sealed class SignupPage {
   private readonly IPage _page;
-  public FieldLocators Fields {get; private set;}
-  public ButtonLocators Buttons {get; private set;}
-  public LinkLocators Links {get; private set;}
-  public LabelLocators Labels {get; private set;}
-  public ContainerLocators Containers {get; private set;}
-  
+  public FieldLocators Fields { get; private set; }
+  public ButtonLocators Buttons { get; private set; }
+  public LinkLocators Links { get; private set; }
+  public LabelLocators Labels { get; private set; }
+  public ContainerLocators Containers { get; private set; }
+
   public SignupPage(IPage page) {
-    _page = page; 
+    _page = page;
     Fields = new FieldLocators(_page);
     Buttons = new ButtonLocators(_page);
     Links = new LinkLocators(_page);
@@ -47,7 +48,7 @@ public sealed class SignupPage {
   public sealed class ContainerLocators(IPage page) : Locators(page) {
     public ILocator Root => _page.Locator("#root");
   }
-  
+
   public sealed class LinkLocators(IPage page) : Locators(page) {
     public ILocator GoToSignIn => _page.Locator("a[href='/signin']");
     public ILocator GoToCypressDotIo => _page.Locator("a[href='https://cypress.io']");
@@ -60,7 +61,7 @@ public sealed class SignupPage {
     await field.FillAsync(value);
   }
 
-  public async Task Open(string page) => await _page.GotoAsync(page);
+  public async Task Open(string page) => await _page.GotoAsync(Env.Get("baseUrl") + page);
 
   public async Task FillForm(
     string? firstName,
@@ -74,6 +75,14 @@ public sealed class SignupPage {
     if (userName != null) await _fillField(Fields.Username, userName);
     if (password != null) await _fillField(Fields.Password, password);
     if (confirmPassword != null) await _fillField(Fields.ConfirmPassword, confirmPassword);
+  }
+
+  public async Task FillForm(UserModel user, bool confirmPassword = true) {
+    if (user.FirstName != null) await _fillField(Fields.FirstName, user.FirstName);
+    if (user.LastName != null) await _fillField(Fields.LastName, user.LastName);
+    if (user.UserName != null) await _fillField(Fields.Username, user.UserName);
+    if (user.Password != null) await _fillField(Fields.Password, user.Password);
+    if (user.Password != null && confirmPassword) await _fillField(Fields.ConfirmPassword, user.Password);
   }
 
   public async Task GoToSignIn() => await Links.GoToSignIn.ClickAsync();

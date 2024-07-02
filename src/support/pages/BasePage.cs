@@ -6,15 +6,15 @@ using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework.Interfaces;
 
-using testFramework.support.pages.interfaces;
-using testFramework.support.pages;
+using TestFramework.Support.pages.interfaces;
+using TestFramework.Support.pages;
 
-using static testFramework.support.Paths;
+using static TestFramework.Support.Paths;
 
-namespace testFramework.support.pages;
+namespace TestFramework.Support.pages;
 
-public class BasePage: PageTest, IScreenshotablePage {
-  public new IPage Page {get; set;}
+public class BasePage : PageTest, IScreenshotablePage {
+  public new IPage Page { get; set; }
   private string? StepDescription;
   public delegate void StepDelegate();
   public void Step(string description) {
@@ -32,8 +32,8 @@ public class BasePage: PageTest, IScreenshotablePage {
 
   [TearDown]
   public async Task TearDownSaveScreenshot() {
-    // if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure) {
+    if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure) {
       await ((IScreenshotablePage)this).SaveScreenshot(ScreenshotFile(TestContext.CurrentContext.Test));
-    // }
+    }
   }
 }

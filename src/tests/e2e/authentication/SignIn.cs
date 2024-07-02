@@ -1,9 +1,5 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.Extensions.Configuration;
-
-using static TestFramework.Support.Env;
-using TestFramework.Support;
 
 using static TestFramework.Support.Enums.FixturePaths;
 
@@ -19,14 +15,12 @@ namespace TestFramework.Tests.E2e.Authentication;
 public class ExampleTest : BasePage
 {
   public FixtureLoader? fix;
-  public IConfigurationRoot? env;
   private LoginPage _lp;
   private FakeBankAccount fakeBankAcc = new FakeBankAccount();
 
   [OneTimeSetUp]
   public void OneTimeSetup()
   {
-    Env.Load();
     fix = new FixtureLoader([Users]);
     BankAccountModel bankAcc = fakeBankAcc.Generate();
   }
@@ -42,7 +36,7 @@ public class ExampleTest : BasePage
   {
 
     Step("Go to Playwright page");
-    await _lp.Open("");
+    await _lp.Open("/signin");
     await _lp.Fields.Username.FillAsync("asd123");
     //   await Page.GotoAsync("https://playwright.dev");
     //   await Expect(Page).ToHaveTitleAsync(new Regex("Playwright"));

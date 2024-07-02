@@ -1,4 +1,4 @@
-using System;
+using TestFramework.Support;
 
 namespace TestFramework.Tests.E2e;
 
@@ -8,7 +8,7 @@ public class BeforeAll
   [OneTimeSetUp]
   public void RunBeforeAnyTests()
   {
-    // ...
+    Env.Load();
   }
 
   [OneTimeTearDown]
